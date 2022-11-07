@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TECNHO-GURU</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="estilos.css">
+    </head>
+    <body>
+        <div id="home">
+        <header>
+            <h1 id ="titulo1">TECNHO</h1>
+            <h2 id ="titulo2">GURU</h2>
+        </header>
+        <nav id="menu">
+            <ul>
+                <div id="opcion1">
+                    <li><a href="#">NOTICIAS DE LA VIA</a></li>
+                </div>
+                <div id="opcion2">
+                    <li><a class="boton_ubicacion" onclick="getLocation()">Ver ubicacion</a></li>
+                </div>
+                <div id="opcion3">
+                    <li><a href="informeVia.jsp">INFORME DE VIA</a></li>
+                </div>
+            </ul>
+        </nav>
+        
+        
+        
+        <p id="geo"></p>
+        
+        <div id="map"></div>
+        
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&libraries=places&callback=iniciarMap"></script>
+        <script>
+            
+            var x = document.getElementById("geo");
+            
+            function getLocation(){
+                if(navigator.geolocation){
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                }else{
+                    x.innerHTML= "no es compatible tu navegador"
+                }
+            }
+
+            function showPosition(position){
+                var latitud = position.coords.latitude;
+                var longitud = position.coords.longitude;
+                x.innerHTML = "MI UBICACION"+ "<br> LATITUD: "+ latitud + "<br> LONGITUD: "+ longitud;
+                iniciarMap(latitud,longitud)
+            }
+            function iniciarMap(latitud,longitud){
+                var coord = {lat:latitud ,lng: longitud};
+                var map = new google.maps.Map(document.getElementById('map'),{
+                zoom: 18,
+                center: coord
+                });
+                var marker = new google.maps.Marker({
+                position: coord,
+                map: map
+                });
+                
+            }
+            
+        </script>
+        <a href="EventoInfo.jsp">registrarse</a>
+    </body>
+</html>
