@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,6 +41,7 @@ public class evento_servelt extends HttpServlet {
             throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
+        String desicion = request.getParameter("action");
         String idstr = request.getParameter("evento_id");
         String nombreEvento = request.getParameter("nombre_evento");
         String tipoEvento = request.getParameter("tipo_evento");
@@ -50,8 +52,17 @@ public class evento_servelt extends HttpServlet {
         
         int idEvento = Integer.parseInt(idstr);
         int horaR = Integer.parseInt(horaRetraso);
+        System.out.println(desicion);
+       
         evento = new Eventos(idEvento,nombreEvento,tipoEvento,lugarEvento,horaR,latitud,longitud);
-        eventosFacade.create(evento);
+        if (desicion.equals("Add")){
+            eventosFacade.create(evento);
+        }else if(desicion.equals("Delete")){
+            eventosFacade.remove(evento);
+        }else if(desicion.equals("Edit")){
+            eventosFacade.edit(evento);
+        }
+        
         
         request.setAttribute("allEventos", eventosFacade.findAll());
         request.getRequestDispatcher("EventoInfo.jsp").forward(request, response);

@@ -40,7 +40,7 @@ public class eventosCerca extends HttpServlet {
         String arrayEventos[]=new String[eventosFacade.count()];
         
         for (int i = 0; i < eventosFacade.count(); i++) {
-            System.out.println(eventosFacade.findAll());
+            
         }
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {

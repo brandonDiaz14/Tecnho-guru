@@ -41,11 +41,15 @@
                             <td><input type="text" name="longitud"  /></td>
                         </tr>
                         <tr>
-                            <td colspan="2">
-                                <center>
-                                <input type="submit" name="action" value="registrarse" />
-                                </center>
-                            </td>
+                            <tr>
+                        <td colspan="2">
+                            
+                            <input type="submit" name="action" value="Add" />
+                            <input type="submit" name="action" value="Edit" />
+                            <input type="submit" name="action" value="Delete" />
+                            
+                        </td>
+               
                         </tr>
                         
                     </table>
